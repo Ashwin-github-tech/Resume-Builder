@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Login page</title>
+    <link rel="stylesheet" href="login.css">
+  </head>
+  <center>
+    <body>
+    <div class="container flex">
+      <div class="resume-page flex">
+        <div class="text">
+          <h1>RESUME BUILDER</h1>
+          <p>build your own resume</p>
+        </div>
+        <form>
+          <input id="email" placeholder="Email" required><br>
+          <input id="pass" placeholder="Password" required>
+          <div class="link">
+            <button type="submit" class="Elogin" id="ELogin">Login</button>
+            <div>
+              <button id="login"><img src="Gsignin.jpg" alt="Button Image" width="300" height="50"></button>
+            </div>
+            <a href="#" class="forgot">Forgot password?</a>           
+          </div>
+          </button>
+          <div class="button">
+            <a href="signup.html">Create new account</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script type="module">
+  
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+    import { getAuth , GoogleAuthProvider , signInWithRedirect , getRedirectResult } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
+
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC_qxtzdtzgi1eoLdBIk_oazXPRVual0BQ",
+    authDomain: "cobra-tech.firebaseapp.com",
+    projectId: "cobra-tech",
+    storageBucket: "cobra-tech.appspot.com",
+    messagingSenderId: "220905437505",
+    appId: "1:220905437505:web:36a380f5b7114c205489c0"
+  };
+  
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider(app);
+
+    login.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        signInWithRedirect(auth, provider);
+    });
+
+    getRedirectResult(auth)
+        .then((result) => {
+            if (result.user) {
+                const user = result.user;
+                window.location.href = "home.html";
+                alert('Login successful');
+            }
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData ? error.customData.email : null;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+        });
+</script>
+  </center>
+</html>

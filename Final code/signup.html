@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>create new account</title>
+    <link rel="stylesheet" href="signup.css">
+    <script src="signup.js"></script>
+  </head>
+  <body>
+    <div class="container flex">
+      <div class="signin-page flex">
+       <form id="signup_form" action="#"><br>
+          <label for="name">Name:</label>
+          <input id="name" type="text" placeholder="" required><br>
+
+          <label for="phoneNumber">Phone number:</label>
+          <input id="phoneNumber" type="tel" placeholder="" required><br>
+
+          <label for="email">Email:</label>
+          <input id="email" type="email" placeholder="" required><br>
+
+          <label for="password">Password:</label>
+          <input id="password" type="password" placeholder="" required><br>
+
+          <label for="confirmPassword">Confirm password:</label>
+          <input id="confirmPassword" type="password" placeholder="" required><br>
+
+          <div class="link">
+            <button onclick=validateForm() type="submit" class="login" id="submit">Create new account</button>
+            <a href="#" class="forgot">Forgot password?</a>
+          </div>
+          <hr>
+          <div class="button">
+            <a href="login.html">Already have an account</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+      import { getDatabase , ref , get , set , child } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+
+var firebaseConfig = {
+    apiKey: "AIzaSyC_qxtzdtzgi1eoLdBIk_oazXPRVual0BQ",
+    authDomain: "cobra-tech.firebaseapp.com",
+    projectId: "cobra-tech",
+    storageBucket: "cobra-tech.appspot.com",
+    messagingSenderId: "220905437505",
+    appId: "1:220905437505:web:36a380f5b7114c205489c0"
+    };
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  document.getElementById("submit").addEventListener( 'click' , function(e){
+
+    set(ref(db , 'user/' + document.getElementById("name").value),
+    {
+      name:document.getElementById("name").value,
+      phonenumber:document.getElementById("name").value,
+      email:document.getElementById("email").value,
+      password:document.getElementById("password").value
+    })
+    alert("User created successfully");
+  })
+    </script>
+  </body>
+</html>
